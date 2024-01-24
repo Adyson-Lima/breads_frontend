@@ -28,4 +28,8 @@ describe('testes da tela Breads', () => {
     expect(screen.getByTestId('mybtn1')).toBeInTheDocument();
   });
 
+  it('Existe botão excluir em Breads?', () => {
+    expect(screen.getByTestId('mybtn2')).toBeInTheDocument();
+  });
+
 });
