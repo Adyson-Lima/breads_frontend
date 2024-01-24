@@ -1,8 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Breads(){
+
+  const[my_breads, setBreads] = useState([]);
+  const navigate = useNavigate();
+
+  // read, busca todos os registros na api
+  useEffect(() => {
+    api.get('api/v1/breads',{})
+    .then(response => {setBreads(response.data)})
+  },[]);
 
   return(
 
@@ -18,17 +27,18 @@ export default function Breads(){
         <table data-testid="mytable" className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row"></th>
-                <td></td>
-                <td></td>
+            {my_breads.map(bread => (
+              <tr key={bread.id}>
+                <th scope="row">{bread.id}</th>
+                <td>{bread.name}</td>
+                <td>{bread.price}</td>
                 <td>
 
                   <button data-testid="mybtn1" type="button"
@@ -38,7 +48,9 @@ export default function Breads(){
                   className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
 
                 </td>
-            </tr>
+              </tr>
+            ))}
+            
           </tbody>
         </table>
 
