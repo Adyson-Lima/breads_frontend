@@ -7,7 +7,7 @@ describe('testes da tela Breads', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <Breads/>
+        <Breads />
       </BrowserRouter>
     );
   });
